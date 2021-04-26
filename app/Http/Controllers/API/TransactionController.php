@@ -233,6 +233,8 @@ class TransactionController extends Controller
                 'promo.code',
                 'payment.status',
                 'method.name',
+                'method.account_number',
+                'transaction.review_state',
                 'transaction.slot'
             ])
             ->select(
@@ -255,6 +257,8 @@ class TransactionController extends Controller
                 'promo.code AS promo_code',
                 'payment.status AS payment_status',
                 'method.name AS method',
+                'method.account_number AS account_number',
+                'transaction.review_state AS review_state',
                 'transaction.slot AS slot'
             )
             ->get();
