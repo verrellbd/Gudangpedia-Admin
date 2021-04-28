@@ -20,7 +20,7 @@ class ReviewController extends Controller
             $review->rate = $request->rate;
             $review->save();
 
-            $transaction = Transaction::where('transaction_id', $request->transaction_id);
+            $transaction = Transaction::where('transaction_id', $request->transaction_id)->first();
             $transaction->review_state = 1;
             $transaction->save();
             return response()->json(['success' => 'Review Successs']);

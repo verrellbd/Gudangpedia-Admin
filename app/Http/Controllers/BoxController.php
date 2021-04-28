@@ -41,10 +41,12 @@ class BoxController extends Controller
         $box->state = 0;
         $box->save();
 
+
         for ($x = 0; $x < $request->slot; $x++) {
             $unit = new Unit;
-            $unit->box_id = $id;
-            $unit->unit_code = strtoupper(substr($unit->box->storage->name, 0, 3) . $unit->unit_id);
+            $unit->box_id = $box->box_id;
+            $unit->save();
+            $unit->unit_code = strtoupper(substr($box->storage->name, 0, 3) . $unit->unit_id);
             $unit->save();
         }
 

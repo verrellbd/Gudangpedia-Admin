@@ -196,11 +196,11 @@ class StorageController extends Controller
                     'image' => 'mimes:jpeg,png,jpg|max:2048',
                 ]);
                 $extension = $request->image->extension();
-                $request->image->storeAs('public/images/storage/', $validated['name'] . "_main" . "." . $extension);
-                $url = "images/storage/" . $validated['name'] . "_main" . "." . $extension;
+                $request->image->storeAs('public/images/storage/', $request->name . "_main" . "." . $extension);
+                $url = "images/storage/" . $request->name . "_main" . "." . $extension;
                 $storage->image = $url;
                 $file = $request->file('image');
-                $file->move("images/storage/", $validated['name'] . "_main" . "." . $extension);
+                $file->move("images/storage/", $request->name . "_main" . "." . $extension);
             }
         }
 
@@ -211,11 +211,11 @@ class StorageController extends Controller
                     'image1' => 'mimes:jpeg,png,jpg|max:2048',
                 ]);
                 $extension = $request->image1->extension();
-                $request->image1->storeAs('public/images/storage/', $validated['name'] . "_1" . "." . $extension);
-                $url = "images/storage/" . $validated['name'] . "_1" . "." . $extension;
+                $request->image1->storeAs('public/images/storage/', $request->name . "_1" . "." . $extension);
+                $url = "images/storage/" . $request->name . "_1" . "." . $extension;
                 $storage->image1 = $url;
                 $file = $request->file('image1');
-                $file->move("images/storage/", $validated['name'] . "_1" . "." . $extension);
+                $file->move("images/storage/", $request->name . "_1" . "." . $extension);
             }
         }
 
@@ -226,11 +226,11 @@ class StorageController extends Controller
                     'image2' => 'mimes:jpeg,png,jpg|max:2048',
                 ]);
                 $extension = $request->image2->extension();
-                $request->image2->storeAs('public/images/storage/', $validated['name'] . "_2" . "." . $extension);
-                $url = "images/storage/" . $validated['name'] . "_2" . "." . $extension;
+                $request->image2->storeAs('public/images/storage/', $request->name . "_2" . "." . $extension);
+                $url = "images/storage/" . $request->name . "_2" . "." . $extension;
                 $storage->image2 = $url;
                 $file = $request->file('image2');
-                $file->move("images/storage/", $validated['name'] . "_2" . "." . $extension);
+                $file->move("images/storage/", $request->name . "_2" . "." . $extension);
             }
         }
 
@@ -241,11 +241,11 @@ class StorageController extends Controller
                     'image3' => 'mimes:jpeg,png,jpg|max:2048',
                 ]);
                 $extension = $request->image3->extension();
-                $request->image3->storeAs('public/images/storage/', $validated['name'] . "_3" . "." . $extension);
-                $url = "images/storage/" . $validated['name'] . "_3" . "." . $extension;
+                $request->image3->storeAs('public/images/storage/', $request->name . "_3" . "." . $extension);
+                $url = "images/storage/" . $request->name . "_3" . "." . $extension;
                 $storage->image3 = $url;
                 $file = $request->file('image3');
-                $file->move("images/storage/", $validated['name'] . "_3" . "." . $extension);
+                $file->move("images/storage/", $request->name . "_3" . "." . $extension);
             }
         }
 
