@@ -119,15 +119,15 @@
                                             <i class="ni ni-single-02 text-default"></i>
                                             <span class="nav-link-text">User Management</span>
                                         </a>
+                                        @if(Auth::user()->role=='admin' || Auth::user()->role=='superadmin')
                                         <div class="collapse" id="navbar-dashboards">
                                             <ul class="nav nav-sm flex-column">
-                                                @if(Auth::user()->role=='admin' || Auth::user()->role=='superadmin')
                                                 <li class="nav-item">
                                                     <a class="nav-link" href="/user">
                                                         <span class="nav-link-text">User</span>
                                                     </a>
                                                 </li>
-                                                @endif
+
                                                 @if(Auth::user()->role=='superadmin')
                                                 <li class="nav-item">
                                                     <a class="nav-link" href="/admin">
@@ -137,6 +137,7 @@
                                                 @endif
                                             </ul>
                                         </div>
+                                        @endif
                                     </li>
                                 </ul>
                             </div>

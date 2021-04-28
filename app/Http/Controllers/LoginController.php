@@ -24,10 +24,10 @@ class LoginController extends Controller
                 // return 'berhasil';
                 return redirect('/home');
             } else {
-                return view('auth.login');
+                return view('auth.login')->with(session()->flash('danger', 'Your Email/Password Not registered'));
             }
         } else {
-            return view('auth.login');
+            return view('auth.login')->with(session()->flash('danger', 'Your Email/Password Not registered'));
         }
     }
 
