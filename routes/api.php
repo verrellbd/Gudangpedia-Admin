@@ -23,6 +23,7 @@ Route::group(['middleware' => 'auth:api'], function () {
     Route::get('user/detail', 'API\UserController@details');
     Route::post('logout', 'API\UserController@logout');
     Route::put('user/update', 'API\UserController@update');
+    Route::put('/user/changePassword', 'API\UserController@changePassword');
 
     //List Transaction
     Route::get('/listOnGoing', 'API\TransactionController@listOnGoing');

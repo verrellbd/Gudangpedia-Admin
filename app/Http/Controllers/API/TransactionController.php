@@ -234,8 +234,8 @@ class TransactionController extends Controller
                 'payment.status',
                 'method.name',
                 'method.account_number',
-                'transaction.review_state',
-                'transaction.slot'
+                'transaction.slot',
+                'transaction.review_state'
             ])
             ->select(
                 'transaction.transaction_id AS transaction_id',
@@ -258,8 +258,8 @@ class TransactionController extends Controller
                 'payment.status AS payment_status',
                 'method.name AS method',
                 'method.account_number AS account_number',
-                'transaction.review_state AS review_state',
-                'transaction.slot AS slot'
+                'transaction.slot AS slot',
+                'transaction.review_state AS review_state'
             )
             ->get();
         return response()->json(['success' => $transaction]);

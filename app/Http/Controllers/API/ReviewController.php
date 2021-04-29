@@ -14,16 +14,21 @@ class ReviewController extends Controller
     public function create(Request $request)
     {
         try {
-            $review = new Review;
-            $review->storage_id = $request->storage_id;
-            $review->description = $request->description;
-            $review->rate = $request->rate;
-            $review->save();
-
             $transaction = Transaction::where('transaction_id', $request->transaction_id)->first();
-            $transaction->review_state = 1;
-            $transaction->save();
-            return response()->json(['success' => 'Review Successs']);
+
+            if ($transaction->review_state == 1) {
+                return response()->json(['error' => 'You cannot write review']);
+            } else {
+                $review = new Review;
+                $review->storage_id = $request->storage_id;
+                $review->description = $request->description;
+                $review->rate = $request->rate;
+                $review->save();
+
+                $transaction->review_state = 1;
+                $transaction->save();
+                return response()->json(['success' => 'Review Successs']);
+            }
         } catch (Throwable $e) {
             return response()->json(['error' => 'You cannot write review']);
         }
