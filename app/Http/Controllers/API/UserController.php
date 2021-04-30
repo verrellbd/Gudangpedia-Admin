@@ -9,6 +9,7 @@ use App\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
@@ -70,10 +71,8 @@ class UserController extends Controller
         $validator = Validator::make($request->all(), [
             'name' => 'required',
             'email' => 'required|email',
-            'password' => 'required',
             'address' => 'required',
             'dob' => 'required',
-            'c_password' => 'required|same:password',
         ]);
 
         if ($validator->fails()) {
@@ -100,8 +99,8 @@ class UserController extends Controller
     public function changePassword(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'password' => 'required',
-            'c_password' => 'required|same:password',
+            'new_password' => 'required',
+            'old_password' => 'required',
         ]);
 
         if ($validator->fails()) {
@@ -109,8 +108,12 @@ class UserController extends Controller
         }
 
         $user = Auth::user();
-        $user->password = bcrypt($request->password);
-        $user->save();
-        return response()->json(['success' => $user], $this->successStatus);
+        if (Hash::check($request->old_password, $user->password)) {
+            $user->password = bcrypt($request->new_password);
+            $user->save();
+            return response()->json(['success' => $user], $this->successStatus);
+        } else {
+            return response()->json(['error' => 'Old Password not Valid'], 401);
+        }
     }
 }
