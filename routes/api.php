@@ -54,4 +54,7 @@ Route::group(['middleware' => 'auth:api'], function () {
 
     //Payment
     Route::post('/payment', 'API\PaymentController@payment');
+
+    //MyStorage
+    Route::get('/mystorage/{user}', 'API\StorageController@mystorage');
 });

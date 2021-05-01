@@ -4,6 +4,8 @@ namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
 use App\Storage;
+use App\Transaction;
+use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -111,7 +113,6 @@ class StorageController extends Controller
                 'description',
                 'image',
                 'storage_id'
-
             )
             ->orderBy('rate', 'desc')
             ->limit(5)
@@ -131,5 +132,35 @@ class StorageController extends Controller
         } else {
             return response()->json(['error' => 'Update Storage Error']);
         }
+    }
+
+    public function mystorage(User $user)
+    {
+        $storage = DB::table('storage')
+            ->join('review', 'review.storage_id', '=', 'storage.storage_id')
+            ->join('users', 'users.id', '=', 'storage.user_id')
+            ->select(
+                'users.name as Owner',
+                'storage.storage_id as storage_id',
+                'storage.name AS name',
+                'storage.address AS address',
+                'storage.city AS city',
+                'storage.description AS description',
+                'storage.image AS image',
+                DB::raw("AVG(rate) AS rate")
+            )
+            ->groupBy(
+                'owner',
+                'name',
+                'address',
+                'city',
+                'description',
+                'image',
+                'storage_id'
+            )
+            ->orderBy('rate', 'desc')
+            ->get();
+        $trans = Transaction::select(DB::raw('SUM(total_price) as total_price'))->where('user_id', $user->id)->first();
+        return response()->json(['success' => $storage, 'total_price' => $trans->total_price]);
     }
 }
