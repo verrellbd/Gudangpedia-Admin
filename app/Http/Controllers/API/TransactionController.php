@@ -167,6 +167,7 @@ class TransactionController extends Controller
             $transaction->payment_id = Payment::get()->last()->payment_id;
             $transaction->state = 0;
             $transaction->slot = $request->slot;
+            $transaction->review_state = 0;
 
             $pin = mt_rand(1000000, 9999999);
             $transaction->pin = str_shuffle($pin);

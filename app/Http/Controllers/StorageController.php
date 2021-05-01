@@ -166,7 +166,6 @@ class StorageController extends Controller
             'name' => 'required|min:5',
             'description' => 'required|min:10',
             'address' => 'required',
-            'code' => 'required|size:6',
             'start_contract' => 'required|before:end_contract',
             'end_contract' => 'required|after:start_contract'
         ]);
