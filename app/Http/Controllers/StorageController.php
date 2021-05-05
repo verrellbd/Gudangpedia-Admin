@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Box;
 use App\Detail;
 use App\Exports\StorageExport;
+use App\Review;
 use App\Storage;
 use App\Unit;
 use Illuminate\Http\Request;
@@ -250,6 +251,13 @@ class StorageController extends Controller
 
         // return $file;
         $storage->save();
+
+        $review = new Review;
+        $review->storage_id = $storage->storage_id;
+        $review->description = 'Nice Storage';
+        $review->rate = 5;
+        $review->save();
+
         return redirect('/storages')->with(session()->flash('default', 'Success Create Storage'));
     }
 
