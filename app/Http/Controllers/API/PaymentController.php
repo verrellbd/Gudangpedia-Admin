@@ -5,6 +5,7 @@ namespace App\Http\Controllers\API;
 use App\Http\Controllers\Controller;
 use App\Mail\PaymentSuccess;
 use App\Transaction;
+use App\Payment;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Mail;
@@ -19,6 +20,11 @@ class PaymentController extends Controller
             $transaction = Transaction::where('transaction_id', $request->transaction_id)->first();
             $transaction->state = 1;
             $transaction->save();
+
+            $payment = Payment::where('payment_id', $transaction->payment_id)->first();
+
+            $payment->status = 'Payment Completed';
+            $payment->save();
             // SELECT t.total_price,d.size,d.type,s.name,s.address ,COUNT(u.unit_id) AS total_unit FROM transaction t JOIN transaction_item ti JOIN unit u JOIN box b JOIN detail d JOIN storage s ON ti.unit_id=u.unit_id and b.box_id=u.box_id AND d.detail_id=b.detail_id AND s.storage_id=b.storage_id AND ti.transaction_id=t.transaction_id WHERE ti.transaction_id=1 GROUP BY t.total_price
 
             $email_trans = DB::table('transaction')

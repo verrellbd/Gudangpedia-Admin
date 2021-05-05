@@ -1,0 +1,9 @@
+Ganti password & user db
+MAIL_MAILER=sendmail
+MAIL_HOST=smtp.gmail.com
+MAIL_PORT=465
+MAIL_USERNAME=deanverrell@gmail.com
+MAIL_PASSWORD=Akupast!suks3s
+MAIL_ENCRYPTION=tls
+MAIL_FROM_ADDRESS=gusdurian@gmail.com
+MAIL_FROM_NAME="${APP_NAME}"
